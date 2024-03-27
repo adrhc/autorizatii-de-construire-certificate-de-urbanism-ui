@@ -1,0 +1,11 @@
+div.searched {
+  margin-top: 0.4rem;
+}
+
+div.links {
+  margin-top: 0.1rem;
+}
+
+div.links > a {
+  display: block;
+}
