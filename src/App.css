@@ -10,22 +10,21 @@
 }
 
 .details {
+  margin-top: 0.1rem;
   font-size: small;
 }
 
-.card {
-  width: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+div.search {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
 }
 
-input[type='text'].search {
-  margin-top: 1rem;
-  width: 100%;
-  display: block;
+div.search input[type='text'] {
+  flex: 1;
   background-color: aliceblue;
 }
 
 button.search {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
