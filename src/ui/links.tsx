@@ -8,7 +8,9 @@ export type LinksParams = {
 export default function Links({ query, links }: LinksParams) {
   if (query === undefined) {
     return <></>;
-  } else if (links && links.length) {
+  } else if (!links) {
+    return <div className="searched">Found nothing for "{query}"</div>;
+  } else {
     return (
       <>
         <div className="searched">Found for "{query}"</div>
@@ -19,7 +21,5 @@ export default function Links({ query, links }: LinksParams) {
         </div>
       </>
     );
-  } else {
-    return <div className="searched">Found nothing for "{query}"</div>;
   }
 }
