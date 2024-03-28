@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import search from './lib/search';
 import Links from './ui/links';
 import './App.css';
@@ -8,28 +8,46 @@ import { useLocation } from 'react-router-dom';
 function App() {
   const queryParams = useLocation().search.slice(1);
   console.log('queryParams:', queryParams);
+
   const [query, setQuery] = useState('');
   const [searchedQuery, setSearchedQuery] = useState<string>();
   const [links, setLinks] = useState([] as string[]);
 
+  const doSearch = useCallback((newQuery? : string) => {
+    console.log(`[doSearch] query = ${query}, newQuery = ${newQuery}`);
+    if (query?.trim()) {
+      search(query).then(setLinks);
+    } else if (newQuery?.trim()) {
+      search(newQuery).then(setLinks);
+    }
+  }, [query]);
+
   function onSearch() {
+    console.log('[onSearch] query:', query);
+    console.log('[onSearch] 1.searchedQuery:', searchedQuery);
     setLinks([]);
     setSearchedQuery(query);
+    console.log('[onSearch] 2.searchedQuery:', searchedQuery);
+    doSearch();
   }
 
-  useEffect(() => {
-    if (searchedQuery?.trim()) {
-      search(searchedQuery).then(setLinks);
-    }
-  }, [searchedQuery]);
+  // useEffect(() => {
+  //   console.log('[useEffect doSearch]');
+  //   doSearch(searchedQuery);
+  // }, [searchedQuery, doSearch]);
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(queryParams);
     const newQuery = urlSearchParams.get('query') || '';
-    // console.log('newQuery:', newQuery);
+      console.log(
+      `[useEffect location] query = ${query}, newQuery = ${newQuery}, searchedQuery = ${searchedQuery}`
+    );
     setQuery(newQuery);
-    !!newQuery && setSearchedQuery(newQuery);
-  }, [queryParams, setSearchedQuery]);
+    if (newQuery?.trim() && newQuery != searchedQuery) {
+      setSearchedQuery(newQuery);
+      doSearch(newQuery);
+    }
+  }, []);
 
   return (
     <>
