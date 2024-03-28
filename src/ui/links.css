@@ -1,5 +1,6 @@
 div.links {
-  margin-top: 0.1rem;
+  margin-top: 0.5rem;
+  text-align: left;
 }
 
 div.links > a {
