@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import search from './lib/search';
-import Links, { LinksParams } from './ui/links';
+import Links from './ui/links';
 import './App.css';
+import SearchedQuery from './ui/searched-query';
 
 function App() {
   const [query, setQuery] = useState('');
-  const [linksParams, setLinksParams] = useState({} as LinksParams);
+  const [searchedQuery, setSearchedQuery] = useState<string>();
+  const [links, setLinks] = useState([] as string[]);
 
   /*useEffect(() => {
     !!query && search(query).then((it) => setLinks(it));
@@ -17,16 +19,27 @@ function App() {
   }, 300);*/
 
   function onSearch() {
-    setLinksParams({ query: '' } as LinksParams);
-    !!query && search(query).then((links) => setLinksParams({ query, links }));
+    setLinks([]);
+    setQuery(query);
+    setSearchedQuery(query);
+    if (query.trim()) {
+      search(query).then(setLinks);
+    }
   }
 
   return (
     <>
-      <div className="title">Caută o frază</div>
-      <div className="details">
-        (ordinea cuvintelor contează, corectitudinea lor mai puțin)
+      <div className="title">
+        Caută o frază în
+        <br />
+        autorizatiile de construire și certificatele de urbanism
+        <br />
+        din Sector 5, București
       </div>
+      <div className="details">
+        (ordinea cuvintelor contează, corectitudinea lor mai puțin, e.g. o literă greșită sau lipsă este acceptabil)
+      </div>
+
       <div className="search">
         <input
           className="search"
@@ -38,7 +51,9 @@ function App() {
       <button className="search" onClick={onSearch}>
         Search
       </button>
-      <Links query={linksParams.query} links={linksParams.links} />
+
+      <SearchedQuery searchedQuery={searchedQuery} emptyResult={!links.length} />
+      <Links links={links} />
     </>
   );
 }
