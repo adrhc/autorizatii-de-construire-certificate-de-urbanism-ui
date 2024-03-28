@@ -9,15 +9,6 @@ function App() {
   const [searchedQuery, setSearchedQuery] = useState<string>();
   const [links, setLinks] = useState([] as string[]);
 
-  /*useEffect(() => {
-    !!query && search(query).then((it) => setLinks(it));
-  }, [query]);*/
-
-  // https://www.carlrippon.com/using-lodash-debounce-with-react-and-ts/
-  /*const debouncedSearch = debounce((query: string) => {
-    !!query && search(query).then((it) => setLinks(it));
-  }, 300);*/
-
   function onSearch() {
     setLinks([]);
     setQuery(query);

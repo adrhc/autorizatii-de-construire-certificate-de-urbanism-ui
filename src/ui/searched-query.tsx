@@ -1,3 +1,5 @@
+import './searched-query.css';
+
 type SearchedQueryParam = {
   searchedQuery: string | undefined;
   emptyResult: boolean;
