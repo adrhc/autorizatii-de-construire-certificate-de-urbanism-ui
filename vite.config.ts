@@ -5,8 +5,8 @@ import react from '@vitejs/plugin-react-swc';
 export default defineConfig({
   server: {
     proxy: {
-      '/api': {
-        target: "https://adrhc.go.ro/autorizatii-de-construire-certificate-de-urbanism",
+      '/autorizatii-de-construire-certificate-de-urbanism': {
+        target: "https://adrhc.go.ro",
         changeOrigin: true,
       },
     },
