@@ -23,7 +23,7 @@ function App() {
       <div className="title">
         Caută o frază în
         <br />
-        autorizatiile de construire și certificatele de urbanism
+        autorizațiile de construire și certificatele de urbanism
         <br />
         din Sector 5, București
       </div>
