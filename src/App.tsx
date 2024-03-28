@@ -47,7 +47,7 @@ function App() {
       setSearchedQuery(newQuery);
       doSearch(newQuery);
     }
-  }, []);
+  }, [queryParams]);
 
   return (
     <>
