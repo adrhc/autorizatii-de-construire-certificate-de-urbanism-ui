@@ -1,49 +1,47 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import search from './lib/search';
 import Links from './ui/links';
 import './App.css';
 import SearchedQuery from './ui/searched-query';
 import { useLocation } from 'react-router-dom';
+import SearchTitle from './ui/search-title';
 
 function App() {
+  const initialized = useRef<string>();
+
   const queryParams = useLocation().search.slice(1);
-  console.log('queryParams:', queryParams);
+  // console.log('queryParams:', queryParams);
 
   const [query, setQuery] = useState('');
   const [searchedQuery, setSearchedQuery] = useState<string>();
   const [links, setLinks] = useState([] as string[]);
 
-  const doSearch = useCallback((newQuery? : string) => {
-    console.log(`[doSearch] query = ${query}, newQuery = ${newQuery}`);
+  const doSearch = (query?: string) => {
+    // console.log(`[doSearch] (new) query = ${query}`);
     if (query?.trim()) {
       search(query).then(setLinks);
-    } else if (newQuery?.trim()) {
-      search(newQuery).then(setLinks);
     }
-  }, [query]);
+  };
 
   function onSearch() {
-    console.log('[onSearch] query:', query);
-    console.log('[onSearch] 1.searchedQuery:', searchedQuery);
+    // console.log(`[onSearch] searchedQuery = ${searchedQuery}, query = ${query}`);
     setLinks([]);
     setSearchedQuery(query);
-    console.log('[onSearch] 2.searchedQuery:', searchedQuery);
-    doSearch();
+    if (query?.trim()) {
+      doSearch(query);
+    }
   }
 
-  // useEffect(() => {
-  //   console.log('[useEffect doSearch]');
-  //   doSearch(searchedQuery);
-  // }, [searchedQuery, doSearch]);
-
   useEffect(() => {
+    if (initialized.current) {
+      return;
+    }
+    initialized.current = queryParams;
     const urlSearchParams = new URLSearchParams(queryParams);
     const newQuery = urlSearchParams.get('query') || '';
-      console.log(
-      `[useEffect location] query = ${query}, newQuery = ${newQuery}, searchedQuery = ${searchedQuery}`
-    );
+    // console.log(`[useEffect] newQuery = ${newQuery}, query = ${query}, searchedQuery = ${searchedQuery}`);
     setQuery(newQuery);
-    if (newQuery?.trim() && newQuery != searchedQuery) {
+    if (newQuery?.trim()) {
       setSearchedQuery(newQuery);
       doSearch(newQuery);
     }
@@ -51,34 +49,16 @@ function App() {
 
   return (
     <>
-      <div className="title">
-        Caută o frază în
-        <br />
-        autorizațiile de construire și certificatele de urbanism
-        <br />
-        din Sector 5, București
-      </div>
-      <div className="details">
-        (ordinea cuvintelor contează, corectitudinea lor mai puțin, e.g. o
-        literă greșită sau lipsă este acceptabil)
-      </div>
+      <SearchTitle />
 
       <div className="search">
-        <input
-          className="search"
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+        <input className="search" type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
       </div>
       <button className="search" onClick={onSearch}>
         Search
       </button>
 
-      <SearchedQuery
-        searchedQuery={searchedQuery}
-        emptyResult={!links.length}
-      />
+      <SearchedQuery searchedQuery={searchedQuery} emptyResult={!links.length} />
       <Links links={links} />
     </>
   );
