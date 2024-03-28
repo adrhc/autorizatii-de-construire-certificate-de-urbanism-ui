@@ -12,7 +12,7 @@ export default function SearchedQuery({
   if (searchedQuery === undefined) {
     return <></>;
   } else if (!searchedQuery.trim()) {
-    return <div className="searched">Căutarea după "{searchedQuery.replace(/ /g, "\u00A0")}"" nu este permisă!</div>;
+    return <div className="searched">Căutarea după "{searchedQuery.replace(/ /g, "\u00A0")}" nu este permisă!</div>;
   } else if (emptyResult) {
     return <div className="searched">Nu s-a găsit nimic pentru "{searchedQuery.replace(/ /g, "\u00A0")}"</div>;
   } else {
