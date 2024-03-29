@@ -1,3 +1,7 @@
+.title {
+  font-weight: bold;
+}
+
 div.search {
   margin-top: 0.5rem;
   display: flex;

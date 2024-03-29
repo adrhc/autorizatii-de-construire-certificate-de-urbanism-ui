@@ -53,7 +53,9 @@ function App() {
 
   return (
     <>
-      <SearchTitle />
+      <div className="title">
+        Caută o frază în autorizațiile de construire și certificatele de urbanism din Sector 5, București
+      </div>
 
       <div className="search">
         <input className="search" type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
