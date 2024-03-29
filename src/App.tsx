@@ -4,7 +4,6 @@ import Links from './ui/links';
 import './App.css';
 import SearchedQuery from './ui/searched-query';
 import { useLocation } from 'react-router-dom';
-import SearchTitle from './ui/search-title';
 import SearchType from './ui/SearchType';
 
 function App() {
