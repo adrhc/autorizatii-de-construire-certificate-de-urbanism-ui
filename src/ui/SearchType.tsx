@@ -39,6 +39,8 @@ export default function SearchType({ type, setType }: SearchTypeParam) {
       <label htmlFor="BIG">toleranță maximă la greșeli (i.e. maxim două caractere greșite per cuvânt)</label>
       <br />
       <div className="search-rule">
+        Grupurile de două litere sunt căutate exact (i.e. nu se tolerează greșelile) indiferent de alegere!
+        <br />
         Pentru oricare dintre opțiuni ordinea cuvintelor contează dar diacriticele și mărimea literelor nu!
       </div>
     </div>
