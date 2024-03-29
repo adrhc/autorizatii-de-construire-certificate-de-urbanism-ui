@@ -5,30 +5,34 @@ import './App.css';
 import SearchedQuery from './ui/searched-query';
 import { useLocation } from 'react-router-dom';
 import SearchTitle from './ui/search-title';
+import SearchType from './ui/SearchType';
 
 function App() {
-  const initialized = useRef<string>();
+  const initialized = useRef(false);
 
   const queryParams = useLocation().search.slice(1);
   // console.log('queryParams:', queryParams);
 
+  const [type, setType] = useState('SMALL');
   const [query, setQuery] = useState('');
   const [searchedQuery, setSearchedQuery] = useState<string>();
   const [links, setLinks] = useState([] as string[]);
 
-  const doSearch = (query?: string) => {
+  // console.log(`[init] type = ${type}, query = ${query}, searchedQuery = ${searchedQuery}`);
+
+  const doSearch = (type: string, query?: string) => {
     // console.log(`[doSearch] (new) query = ${query}`);
     if (query?.trim()) {
-      search(query).then(setLinks);
+      search(type, query).then(setLinks);
     }
   };
 
   function onSearch() {
-    // console.log(`[onSearch] searchedQuery = ${searchedQuery}, query = ${query}`);
+    // console.log(`[onSearch] query = ${query}, searchedQuery = ${searchedQuery}`);
     setLinks([]);
     setSearchedQuery(query);
     if (query?.trim()) {
-      doSearch(query);
+      doSearch(type, query);
     }
   }
 
@@ -36,16 +40,16 @@ function App() {
     if (initialized.current) {
       return;
     }
-    initialized.current = queryParams;
+    initialized.current = true;
     const urlSearchParams = new URLSearchParams(queryParams);
     const newQuery = urlSearchParams.get('query') || '';
-    // console.log(`[useEffect] newQuery = ${newQuery}, query = ${query}, searchedQuery = ${searchedQuery}`);
+    // console.log(`[useEffect] type = ${type}, newQuery = ${newQuery}`);
     setQuery(newQuery);
     if (newQuery?.trim()) {
       setSearchedQuery(newQuery);
-      doSearch(newQuery);
+      doSearch(type, newQuery);
     }
-  }, [queryParams]);
+  }, [queryParams, type]);
 
   return (
     <>
@@ -54,11 +58,12 @@ function App() {
       <div className="search">
         <input className="search" type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
       </div>
+      <SearchType type={type} setType={setType} />
       <button className="search" onClick={onSearch}>
         Search
       </button>
 
-      <SearchedQuery searchedQuery={searchedQuery} emptyResult={!links.length} />
+      <SearchedQuery searchedQuery={searchedQuery} count={links.length} />
       <Links links={links} />
     </>
   );

@@ -10,10 +10,6 @@ export default function SearchTitle() {
         <br />
         din Sector 5, București
       </div>
-      <div className="details">
-        (ordinea cuvintelor contează, corectitudinea lor mai puțin, e.g. o literă greșită sau lipsă este
-        acceptabil)
-      </div>
     </>
   );
 }
