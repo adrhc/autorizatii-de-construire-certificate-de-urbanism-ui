@@ -1,14 +1,15 @@
 import './SearchType.css';
 
 export type SearchTypeParam = {
-    type: string,
-    setType: (type: string) => void
-}
+  type: string;
+  setType: (type: string) => void;
+};
 
-export default function SearchType({type, setType}: SearchTypeParam) {
+export default function SearchType({ type, setType }: SearchTypeParam) {
   return (
     <div className="search-type">
       <input
+        id="EXACT"
         type="radio"
         name="type"
         value="EXACT"
@@ -18,6 +19,7 @@ export default function SearchType({type, setType}: SearchTypeParam) {
       <label htmlFor="EXACT">căutare exactă (i.e. cuvintele vor fi căutate așa cum s-au scris)</label>
       <br />
       <input
+        id="SMALL"
         type="radio"
         name="type"
         value="SMALL"
@@ -27,6 +29,7 @@ export default function SearchType({type, setType}: SearchTypeParam) {
       <label htmlFor="SMALL">toleranță minimă la greșeli (i.e. maxim un caracter greșit per cuvânt)</label>
       <br />
       <input
+        id="BIG"
         type="radio"
         name="type"
         value="BIG"

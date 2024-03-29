@@ -9,3 +9,7 @@
   margin-top: 0.3rem;
   font-size: small;
 }
+
+label {
+  cursor: pointer;
+}
