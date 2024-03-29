@@ -6,6 +6,7 @@ export type SearchTypeParam = {
 };
 
 export default function SearchType({ type, setType }: SearchTypeParam) {
+  // console.log(`[SearchType] type = ${type}`);
   return (
     <div className="search-type">
       <input
@@ -14,7 +15,7 @@ export default function SearchType({ type, setType }: SearchTypeParam) {
         name="type"
         value="EXACT"
         onChange={(e) => setType(e.target.value)}
-        defaultChecked={type === 'EXACT'}
+        checked={type === 'EXACT'}
       />
       <label htmlFor="EXACT">căutare exactă (i.e. cuvintele vor fi căutate așa cum s-au scris)</label>
       <br />
@@ -24,7 +25,7 @@ export default function SearchType({ type, setType }: SearchTypeParam) {
         name="type"
         value="SMALL"
         onChange={(e) => setType(e.target.value)}
-        defaultChecked={type === 'SMALL'}
+        checked={type === 'SMALL'}
       />
       <label htmlFor="SMALL">toleranță minimă la greșeli (i.e. maxim un caracter greșit per cuvânt)</label>
       <br />
@@ -34,7 +35,7 @@ export default function SearchType({ type, setType }: SearchTypeParam) {
         name="type"
         value="BIG"
         onChange={(e) => setType(e.target.value)}
-        defaultChecked={type === 'BIG'}
+        checked={type === 'BIG'}
       />
       <label htmlFor="BIG">toleranță maximă la greșeli (i.e. maxim două caractere greșite per cuvânt)</label>
       <br />
