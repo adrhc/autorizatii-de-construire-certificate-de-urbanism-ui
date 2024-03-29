@@ -10,13 +10,12 @@ function App() {
   const initialized = useRef(false);
 
   const queryParams = useLocation().search.slice(1);
-  console.log('queryParams:', queryParams);
+  // console.log('queryParams:', queryParams);
 
   const [type, setType] = useState('SMALL');
   const [query, setQuery] = useState('');
   const [searchedQuery, setSearchedQuery] = useState<string>();
   const [links, setLinks] = useState([] as string[]);
-
   // console.log(`[init] type = ${type}, query = ${query}, searchedQuery = ${searchedQuery}`);
 
   const doSearch = (type: string, query?: string) => {
@@ -43,7 +42,7 @@ function App() {
     const urlSearchParams = new URLSearchParams(queryParams);
     const newType = urlSearchParams.get('type') || 'SMALL';
     const newQuery = urlSearchParams.get('query') || '';
-    console.log(`[useEffect] newType = ${newType}, newQuery = ${newQuery}`);
+    // console.log(`[useEffect] newType = ${newType}, newQuery = ${newQuery}`);
     setType(newType);
     setQuery(newQuery);
     if (newQuery?.trim()) {
