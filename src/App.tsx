@@ -48,9 +48,9 @@ function App() {
     setQuery(newQuery);
     if (newQuery?.trim()) {
       setSearchedQuery(newQuery);
-      doSearch(type, newQuery);
+      doSearch(newType, newQuery);
     }
-  }, [queryParams, type]);
+  }, [queryParams]);
 
   return (
     <>
