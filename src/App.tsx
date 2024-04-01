@@ -84,7 +84,7 @@ function App() {
 
       <SearchType type={type} setType={setType} />
 
-      <Stack direction="row" justifyContent="center" sx={{ mt: 1, mb: 1 }}>
+      <Stack direction={isSmDown ? "column" : "row" } justifyContent="center" sx={{ mt: 1, mb: 1 }}>
         <Button variant="outlined" onClick={onSearch} size={btnSize}>
           Caută
         </Button>
