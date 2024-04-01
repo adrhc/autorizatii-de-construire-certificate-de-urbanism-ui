@@ -6,23 +6,24 @@ type SearchedQueryParam = {
 };
 
 export default function SearchedQuery({ searchedQuery, count }: SearchedQueryParam) {
+  const styles = {textAlign: "center", fontWeight: "bold"};
   if (searchedQuery === undefined) {
     return <></>;
   } else if (!searchedQuery.trim()) {
     return (
-      <Box textAlign="center" fontWeight="bold">Căutarea după "{searchedQuery.replace(/ /g, '\u00A0')}" nu este permisă!</Box>
+      <Box sx={styles}>Căutarea după "{searchedQuery.replace(/ /g, '\u00A0')}" nu este permisă!</Box>
     );
   } else if (count == 1) {
     return (
-      <Box textAlign="center" fontWeight="bold">S-a găsit {count} rezultat pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</Box>
+      <Box sx={styles}>S-a găsit {count} rezultat pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</Box>
     );
   } else if (count > 1) {
     return (
-      <Box textAlign="center" fontWeight="bold">S-au găsit {count} rezultate pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</Box>
+      <Box sx={styles}>S-au găsit {count} rezultate pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</Box>
     );
   } else {
     return (
-      <Box textAlign="center" fontWeight="bold">Nu s-a găsit nimic pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</Box>
+      <Box sx={styles}>Nu s-a găsit nimic pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</Box>
     );
   }
 }
