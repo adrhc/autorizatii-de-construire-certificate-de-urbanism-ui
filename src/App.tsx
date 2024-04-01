@@ -59,10 +59,9 @@ function App() {
   // xs, sm, md, lg, xl
   const theme = useTheme();
   const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
-  const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
-  const btnSize = isSmUp && isMdDown ? 'medium' : isSmDown ? 'large' : 'small';
-  // console.log(`isSmDown = ${isSmDown}, isMdDown = ${isMdDown}, btnSize = ${btnSize}`);
+  const btnSize = isSmUp && isMdDown ? 'medium' : !isSmUp ? 'large' : 'small';
+  // console.log(`isSmUp = ${isSmUp}, isMdDown = ${isMdDown}, btnSize = ${btnSize}`);
 
   return (
     <>
@@ -84,7 +83,7 @@ function App() {
 
       <SearchType type={type} setType={setType} />
 
-      <Stack direction={isSmDown ? "column" : "row" } justifyContent="center" sx={{ mt: 1, mb: 1 }}>
+      <Stack sx={{ flexDirection: ['column', 'row'], mt: 1, mb: 1, justifyContent: 'center' }}>
         <Button variant="outlined" onClick={onSearch} size={btnSize}>
           Caută
         </Button>
