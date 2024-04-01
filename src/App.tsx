@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useTheme from '@mui/material/styles/useTheme';
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 function App() {
   const initialized = useRef(false);
@@ -65,8 +65,10 @@ function App() {
 
   return (
     <>
-      <Box sx={{ textAlign: 'center', fontWeight: 'bold' }}>
-        Caută o frază în autorizațiile de construire și certificatele de urbanism din Sector 5, București
+      <Box sx={{ textAlign: 'center' }}>
+        <Typography variant="h6">
+          Caută o frază în autorizațiile de construire și certificatele de urbanism din Sector 5, București
+        </Typography>
       </Box>
 
       <TextField
