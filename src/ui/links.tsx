@@ -9,7 +9,7 @@ export default function Links({ links }: LinksParam) {
     <Stack sx={{ mt: 1 }}>
       {!!links &&
         links.map((l) => (
-          <Link key={l} href={l} sx={{ wordBreak: 'break-word', fontSize: ['inherit', 'small'] }}>
+          <Link key={l} href={l} sx={{ wordBreak: 'break-word' }}>
             {l}
           </Link>
         ))}
