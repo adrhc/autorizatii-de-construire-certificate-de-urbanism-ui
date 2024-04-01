@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import search from './lib/search';
 import Links from './ui/links';
-import './App.css';
 import SearchedQuery from './ui/searched-query';
 import { useLocation } from 'react-router-dom';
 import SearchType from './ui/SearchType';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import useTheme from '@mui/material/styles/useTheme';
+import { Stack } from '@mui/material';
 
 function App() {
   const initialized = useRef(false);
@@ -51,19 +56,39 @@ function App() {
     }
   }, [queryParams]);
 
+  // xs, sm, md, lg, xl
+  const theme = useTheme();
+  const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
+  const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+  const btnSize = isSmUp && isMdDown ? 'medium' : isSmDown ? 'large' : 'small';
+  // console.log(`isSmDown = ${isSmDown}, isMdDown = ${isMdDown}, btnSize = ${btnSize}`);
+
   return (
     <>
-      <div className="title">
+      <Box sx={{ textAlign: 'center', fontWeight: 'bold' }}>
         Caută o frază în autorizațiile de construire și certificatele de urbanism din Sector 5, București
-      </div>
+      </Box>
 
-      <div className="search">
-        <input className="search" type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
-      </div>
+      <TextField
+        fullWidth
+        id="query"
+        label="Fraza de căutare"
+        type="search"
+        variant="outlined"
+        margin="normal"
+        size={isSmUp ? 'small' : 'medium'}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+
       <SearchType type={type} setType={setType} />
-      <button className="search" onClick={onSearch}>
-        Search
-      </button>
+
+      <Stack direction="row" justifyContent="center" sx={{ mt: 1, mb: 1 }}>
+        <Button variant="outlined" onClick={onSearch} size={btnSize}>
+          Caută
+        </Button>
+      </Stack>
 
       <SearchedQuery searchedQuery={searchedQuery} count={links.length} />
       <Links links={links} />

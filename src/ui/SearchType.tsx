@@ -1,4 +1,8 @@
-import './SearchType.css';
+import { useMediaQuery } from '@mui/material';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import { useTheme } from '@mui/material/styles';
 
 export type SearchTypeParam = {
   type: string;
@@ -6,44 +10,27 @@ export type SearchTypeParam = {
 };
 
 export default function SearchType({ type, setType }: SearchTypeParam) {
-  // console.log(`[SearchType] type = ${type}`);
+  const theme = useTheme();
+  const size = useMediaQuery(theme.breakpoints.down('sm')) ? 'medium' : 'small';
+
+  // console.log(`[SearchType] type = ${type}, size = ${size}`);
   return (
-    <div className="search-type">
-      <input
-        id="EXACT"
-        type="radio"
-        name="type"
+    <RadioGroup defaultValue="SMALL" name="type">
+      <FormControlLabel
         value="EXACT"
-        onChange={(e) => setType(e.target.value)}
-        checked={type === 'EXACT'}
+        control={<Radio size={size} checked={type === 'EXACT'} onChange={(e) => setType(e.target.value)} />}
+        label="căutare exactă (i.e. cuvintele vor fi căutate așa cum s-au scris)"
       />
-      <label htmlFor="EXACT">căutare exactă (i.e. cuvintele vor fi căutate așa cum s-au scris)</label>
-      <br />
-      <input
-        id="SMALL"
-        type="radio"
-        name="type"
+      <FormControlLabel
         value="SMALL"
-        onChange={(e) => setType(e.target.value)}
-        checked={type === 'SMALL'}
+        control={<Radio size={size} checked={type === 'SMALL'} onChange={(e) => setType(e.target.value)} />}
+        label="toleranță moderată la greșeli (i.e. maxim un caracter greșit per cuvânt)"
       />
-      <label htmlFor="SMALL">toleranță minimă la greșeli (i.e. maxim un caracter greșit per cuvânt)</label>
-      <br />
-      <input
-        id="BIG"
-        type="radio"
-        name="type"
+      <FormControlLabel
         value="BIG"
-        onChange={(e) => setType(e.target.value)}
-        checked={type === 'BIG'}
+        control={<Radio size={size} checked={type === 'BIG'} onChange={(e) => setType(e.target.value)} />}
+        label="toleranță maximă la greșeli (i.e. maxim două caractere greșite per cuvânt)"
       />
-      <label htmlFor="BIG">toleranță maximă la greșeli (i.e. maxim două caractere greșite per cuvânt)</label>
-      <br />
-      <div className="search-rule">
-        Grupurile de două litere sunt căutate exact (i.e. nu se tolerează greșelile) indiferent de alegere!
-        <br />
-        Pentru oricare dintre opțiuni ordinea cuvintelor contează dar diacriticele și mărimea literelor nu!
-      </div>
-    </div>
+    </RadioGroup>
   );
 }

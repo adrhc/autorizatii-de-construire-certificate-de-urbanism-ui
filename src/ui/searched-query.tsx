@@ -1,4 +1,4 @@
-import './searched-query.css';
+import { Box } from "@mui/material";
 
 type SearchedQueryParam = {
   searchedQuery: string | undefined;
@@ -10,19 +10,19 @@ export default function SearchedQuery({ searchedQuery, count }: SearchedQueryPar
     return <></>;
   } else if (!searchedQuery.trim()) {
     return (
-      <div className="searched">Căutarea după "{searchedQuery.replace(/ /g, '\u00A0')}" nu este permisă!</div>
+      <Box textAlign="center">Căutarea după "{searchedQuery.replace(/ /g, '\u00A0')}" nu este permisă!</Box>
     );
   } else if (count == 1) {
     return (
-      <div className="searched">S-a găsit {count} rezultat pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</div>
+      <Box textAlign="center">S-a găsit {count} rezultat pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</Box>
     );
   } else if (count > 1) {
     return (
-      <div className="searched">S-au găsit {count} rezultate pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</div>
+      <Box textAlign="center">S-au găsit {count} rezultate pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</Box>
     );
   } else {
     return (
-      <div className="searched">Nu s-a găsit nimic pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</div>
+      <Box textAlign="center">Nu s-a găsit nimic pentru "{searchedQuery.replace(/ /g, '\u00A0')}"</Box>
     );
   }
 }
