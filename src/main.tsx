@@ -8,14 +8,25 @@ import App from './App.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
+import { ThemeProvider, createTheme } from '@mui/material';
+
+const theme = createTheme({
+  palette: {
+    background: {
+      default: '#fffaf0',
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <CssBaseline />
-      <Container sx={{pt: 1, pb: 1}}>
-        <App />
-      </Container>
-    </BrowserRouter>
-  </React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <React.StrictMode>
+      <BrowserRouter>
+        <Container sx={{ pt: 1, pb: 1 }}>
+          <App />
+        </Container>
+      </BrowserRouter>
+    </React.StrictMode>
+  </ThemeProvider>
 );
