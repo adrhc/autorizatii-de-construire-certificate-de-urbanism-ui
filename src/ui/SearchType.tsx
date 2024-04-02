@@ -34,7 +34,7 @@ export default function SearchType({ type, setType }: SearchTypeParam) {
         />
       </RadioGroup>
       <Box sx={{ fontSize: 'small', mt: 1, mb: 1 }}>
-        Grupurile de două litere sunt căutate exact (i.e. nu se tolerează greșelile) indiferent de alegere!
+        Grupurile de două litere sunt căutate exact, i.e. nu se tolerează greșelile!
         <br />
         Pentru oricare dintre opțiuni ordinea cuvintelor contează dar diacriticele și mărimea literelor nu!
       </Box>
