@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import search from './lib/search';
-import Links from './ui/links';
-import SearchedQuery from './ui/searched-query';
+import Links from './ui/Links';
+import SearchedQuery from './ui/SearchedQuery';
 import { useLocation } from 'react-router-dom';
 import SearchType from './ui/SearchType';
 import Button from '@mui/material/Button';
