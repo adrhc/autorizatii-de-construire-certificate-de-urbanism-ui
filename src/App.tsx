@@ -64,14 +64,14 @@ function App() {
     <>
       <Box sx={{ textAlign: 'center' }}>
         <Typography variant="h6">
-          Caută o frază în autorizațiile de construire și certificatele de urbanism din Sector 5, București
+          Caută autorizații de construire și certificate de urbanism din Sector 5, București
         </Typography>
       </Box>
 
       <TextField
         fullWidth
         id="query"
-        label="Fraza de căutare"
+        label="Cuvântul sau fraza de căutare"
         type="search"
         variant="outlined"
         margin="normal"
