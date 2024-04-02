@@ -6,7 +6,7 @@ type SearchedQueryParam = {
 };
 
 export default function SearchedQuery({ searchedQuery, count }: SearchedQueryParam) {
-  const styles = { textAlign: 'center' };
+  const styles = { textAlign: 'center', mt: 1, mb: 1 };
   if (searchedQuery === undefined) {
     return <></>;
   } else if (!searchedQuery.trim()) {
